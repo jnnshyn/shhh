@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        body {
+            background-color: #0c0c0c;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 960px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .registration-form {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            flex: 1;
+            padding: 0 10px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+        .form-control {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 1%;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            color: black;
+            background-color: white;
+        }
+
+            .form-control:hover {
+                background-color: white;
+                border-color: #ccc;
+            }
+
+        .upload-control {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: darkblue;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        #photo-preview {
+            display: block;
+            margin: 0 auto 10px;
+            max-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- First Form: Student Registration -->
+        <div class="registration-form" id="registrationFormContainer">
+            <h2 class="text-center">Student Registration</h2>
+            <form id="registrationForm" onsubmit="validateRegistrationForm(event)">
+                <div class="form-row">
+                    <!-- Group 1: Last Name, Guardian's Name -->
+                    <div class="form-group col-md-6 mb-3">
+                        
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" required>
+                        <div class="error-message" id="lastnameError"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="guardianname">Guardian's Name</label>
+                        <input type="text" class="form-control" id="guardianname" required>
+                        <div class="error-message" id="guardiannameError"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- Group 2: Upload Photo, First Name, Guardian's Phone Number -->
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="pimage">Upload Picture:</label>
+                        <input type="file" id="pimage" name="pimage" accept="image/*" />
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="firstname" required>
+                        <div class="error-message" id="firstnameError"></div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="guardianphonenumber">Guardian's Phone Number</label>
+                        <input type="tel" class="form-control" id="guardianphonenumber" placeholder="0000-000-000" required>
+                        <div class="error-message" id="guardianphonenumberError"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- Group 3: Middle Name, Relationship -->
+                    <div class="form-group col-md-6 mb-3">
+
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="middlename">Middle Name</label>
+                        <input type="text" class="form-control" id="middlename">
+                        <div class="error-message" id="middlenameError"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="relationship">Relationship</label>
+                        <input type="text" class="form-control" id="relationship" required>
+                        <div class="error-message" id="relationshipError"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- Group 4: Student ID, Student Phone Number -->
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="studentid">Student ID</label>
+                        <input type="text" class="form-control" id="studentid">
+                        <div class="error-message" id="studentidError"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="studentnumber">Student Phone Number</label>
+                        <input type="tel" class="form-control" id="studentnumber" placeholder="0000-000-000" required>
+                        <div class="error-message" id="studentnumberError"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+
+                    </div>
+                </div>
+                <div class="form-group row justify-content-end">
+                    <!-- Submit Button -->
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include jQuery and Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include your custom JavaScript -->
+    <script>
+        function validateRegistrationForm(event) {
+            event.preventDefault();
+            let isValid = true;
+
+            const lastname = document.getElementById('lastname').value.trim();
+            const guardianname = document.getElementById('guardianname').value.trim();
+            const firstname = document.getElementById('firstname').value.trim();
+            const guardianphonenumber = document.getElementById('guardianphonenumber').value.trim();
+            let middlename = document.getElementById('middlename').value.trim();
+            const relationship = document.getElementById('relationship').value.trim();
+            const studentid = document.getElementById('studentid').value.trim();
+            const studentnumber = document.getElementById('studentnumber').value.trim();
+
+            clearErrors();
+
+            if (lastname === '') {
+                showError('lastnameError', 'Last Name is required.');
+                isValid = false;
+            }
+
+            if (guardianname === '') {
+                showError('guardiannameError', 'Guardian\'s Name is required.');
+                isValid = false;
+            }
+
+            if (firstname === '') {
+                showError('firstnameError', 'First Name is required.');
+                isValid = false;
+            }
+
+            if (guardianphonenumber === '') {
+                showError('guardianphonenumberError', 'Guardian\'s Phone Number is required.');
+                isValid = false;
+            } else if (!validatePhoneNumber(guardianphonenumber)) {
+                showError('guardianphonenumberError', 'Guardian\'s Phone Number is not valid.');
+                isValid = false;
+            }
+
+            if (middlename === '') {
+                showError('middlenameError', 'Middle Name is required. If no middle name, enter "N/A".');
+                isValid = false;
+            } else {
+                document.getElementById('middlename').value = middlename || 'N/A';
+                showError('middlenameError', '');
+            }
+
+            if (relationship === '') {
+                showError('relationshipError', 'Relationship is required.');
+                isValid = false;
+            }
+
+            if (studentid === '') {
+                showError('studentidError', 'Student ID is required.');
+                isValid = false;
+            } else if (!validateStudentID(studentid)) {
+                showError('studentidError', 'Student ID must be exactly 7 digits.');
+                isValid = false;
+            }
+
+            if (studentnumber === '') {
+                showError('studentnumberError', 'Student Phone Number is required.');
+                isValid = false;
+            } else if (!validatePhoneNumber(studentnumber)) {
+                showError('studentnumberError', 'Student Phone Number is not valid.');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Form is valid, you can submit the form here if needed
+                alert('Form submitted successfully!');
+                document.getElementById('registrationForm').submit();
+            }
+        }
+
+        function validatePhoneNumber(phoneNumber) {
+            // Remove non-numeric characters
+            const cleaned = phoneNumber.replace(/\D/g, '');
+            return cleaned.length === 11;
+        }
+
+        function validateStudentID(studentID) {
+            // Check if the student ID is exactly 7 digits
+            const cleaned = studentID.replace(/\D/g, '');
+            return cleaned.length === 7;
+        }
+
+        function showError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(element => {
+                element.textContent = '';
+            });
+        }
+
+    </script>
+</body>
+</html>
